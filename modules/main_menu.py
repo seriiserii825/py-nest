@@ -21,6 +21,7 @@ def main_menu():
     choice = Menu.choose_option()
     if choice == 0:
         migration_generate()
+        migration_run()
         main_menu()
     elif choice == 1:
         migration_run()
