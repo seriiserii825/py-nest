@@ -1,43 +1,44 @@
-from classes.Menu import Menu
-from modules.generate_resource import generate_resource
+from classes.Select import Select
+from modules.generate_nest import generate_nest
 from modules.migration_check import migration_check
 from modules.migration_generate import migration_generate
 from modules.migration_revert import migration_revert
 from modules.migration_run import migration_run
 from modules.migration_show import migration_show
+from modules.show_package_json_migrations import show_package_json_migrations
 
 
 def main_menu():
     options = [
-        "0).Migration Generate",
-        "1).Migration Run",
-        "2).Migration Revert",
-        "3).Migration Show",
-        "4).Migration Check",
-        "5).Generate Resource",
-        "6).Exit",
+        "Migration Generate",
+        "Migration Run",
+        "Migration Revert",
+        "Migration Show",
+        "Migration Check",
+        "Generate (nest g)",
+        "Show package json migrations",
+        "Exit",
     ]
-    Menu.display("Main Menu", ["Options"], [[opt] for opt in options])
-    choice = Menu.choose_option()
-    if choice == 0:
+    selected = Select.select_with_fzf(options, multi=False)
+    choice = selected[0] if selected else "Exit"
+
+    if choice == "Migration Generate":
         migration_generate()
         migration_run()
-        main_menu()
-    elif choice == 1:
+    elif choice == "Migration Run":
         migration_run()
-        main_menu()
-    elif choice == 2:
+    elif choice == "Migration Revert":
         migration_revert()
-        main_menu()
-    elif choice == 3:
+    elif choice == "Migration Show":
         migration_show()
-        main_menu()
-    elif choice == 4:
+    elif choice == "Migration Check":
         migration_check()
-        main_menu()
-    elif choice == 5:
-        generate_resource()
-        main_menu()
+    elif choice == "Generate (nest g)":
+        generate_nest()
+    elif choice == "Show package json migrations":
+        show_package_json_migrations()
     else:
         print("Exiting...")
         exit(0)
+
+    main_menu()

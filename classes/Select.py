@@ -5,10 +5,11 @@ from typing import List
 
 class Select:
     @staticmethod
-    def select_with_fzf(options):
+    def select_with_fzf(options, multi=True):
         input_text = "\n".join(options)
+        cmd = ["fzf", "--multi"] if multi else ["fzf"]
         result = subprocess.run(
-            ["fzf", "--multi"], input=input_text.encode(), stdout=subprocess.PIPE
+            cmd, input=input_text.encode(), stdout=subprocess.PIPE
         )
         selected = result.stdout.decode().strip().split("\n")
         return selected if selected != [""] else []
