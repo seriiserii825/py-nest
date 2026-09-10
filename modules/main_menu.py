@@ -1,3 +1,4 @@
+from classes.Print import Print
 from classes.Select import Select
 from modules.generate_nest import generate_nest
 from modules.migration_check import migration_check
@@ -22,23 +23,26 @@ def main_menu():
     selected = Select.select_with_fzf(options, multi=False)
     choice = selected[0] if selected else "Exit"
 
-    if choice == "Migration Generate":
-        migration_generate()
-        migration_run()
-    elif choice == "Migration Run":
-        migration_run()
-    elif choice == "Migration Revert":
-        migration_revert()
-    elif choice == "Migration Show":
-        migration_show()
-    elif choice == "Migration Check":
-        migration_check()
-    elif choice == "Generate (nest g)":
-        generate_nest()
-    elif choice == "Show package json migrations":
-        show_package_json_migrations()
-    else:
-        print("Exiting...")
-        exit(0)
+    try:
+        if choice == "Migration Generate":
+            migration_generate()
+            migration_run()
+        elif choice == "Migration Run":
+            migration_run()
+        elif choice == "Migration Revert":
+            migration_revert()
+        elif choice == "Migration Show":
+            migration_show()
+        elif choice == "Migration Check":
+            migration_check()
+        elif choice == "Generate (nest g)":
+            generate_nest()
+        elif choice == "Show package json migrations":
+            show_package_json_migrations()
+        else:
+            print("Exiting...")
+            exit(0)
+    except RuntimeError as e:
+        Print.error(str(e))
 
     main_menu()
