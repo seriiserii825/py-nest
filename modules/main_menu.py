@@ -1,5 +1,6 @@
 from classes.Print import Print
 from classes.Select import Select
+from modules.seed import seed
 from modules.generate_nest import generate_nest
 from modules.migration_check import migration_check
 from modules.migration_generate import migration_generate
@@ -11,6 +12,7 @@ from modules.show_package_json_migrations import show_package_json_migrations
 
 def main_menu():
     options = [
+        "Seed",
         "Migration Generate",
         "Migration Run",
         "Migration Revert",
@@ -24,7 +26,9 @@ def main_menu():
     choice = selected[0] if selected else "Exit"
 
     try:
-        if choice == "Migration Generate":
+        if choice == "Seed":
+            seed()
+        elif choice == "Migration Generate":
             migration_generate()
             migration_run()
         elif choice == "Migration Run":
