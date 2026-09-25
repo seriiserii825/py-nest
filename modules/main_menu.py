@@ -1,5 +1,6 @@
-from classes.Print import Print
-from classes.Select import Select
+from py_libs.Print import Print
+from py_libs.Select import Select
+
 from modules.seed import seed
 from modules.generate_nest import generate_nest
 from modules.migration_check import migration_check
@@ -22,8 +23,7 @@ def main_menu():
         "Show package json migrations",
         "Exit",
     ]
-    selected = Select.select_with_fzf(options, multi=False)
-    choice = selected[0] if selected else "Exit"
+    choice = Select.select_fzf_one(options) or "Exit"
 
     try:
         if choice == "Seed":

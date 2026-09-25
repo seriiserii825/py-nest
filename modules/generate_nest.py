@@ -1,7 +1,7 @@
-from classes.Command import Command
-from classes.InputValidator import InputValidator
-from classes.Print import Print
-from classes.Select import Select
+from py_libs.Command import Command
+from py_libs.InputValidator import InputValidator
+from py_libs.Print import Print
+from py_libs.Select import Select
 
 SCHEMATICS = [
     ("application", "application", "Generate a new application within a monorepo"),
@@ -28,11 +28,11 @@ SCHEMATICS = [
 
 def generate_nest():
     options = [f"{name} - {desc}" for name, _, desc in SCHEMATICS]
-    selected = Select.select_with_fzf(options, multi=False)
+    selected = Select.select_fzf_one(options)
     if not selected:
         Print.error("Nothing selected")
         return
-    choice = options.index(selected[0])
+    choice = options.index(selected)
     schematic, alias, _ = SCHEMATICS[choice]
 
     name = InputValidator.get_string(f"Enter name for {schematic}: ")

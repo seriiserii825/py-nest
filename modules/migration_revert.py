@@ -1,4 +1,4 @@
-from classes.Command import Command
+from py_libs.Command import Command
 
 
 def migration_revert():
