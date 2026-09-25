@@ -8,6 +8,15 @@ dependencies = [
     "autopep8>=2.3.2",
     "flake8>=7.3.0",
     "mypy>=1.19.1",
+    "py-libs",
     "rich>=14.2.0",
     "simple-term-menu>=1.6.6",
 ]
+
+[tool.uv.workspace]
+members = [
+    "libs/py-libs",
+]
+
+[tool.uv.sources]
+py-libs = { workspace = true, editable = true }
