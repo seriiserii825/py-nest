@@ -1,6 +1,7 @@
 from py_libs.Print import Print
 from py_libs.Select import Select
 
+from modules.backup import backup
 from modules.seed import seed
 from modules.generate_nest import generate_nest
 from modules.migration_check import migration_check
@@ -14,6 +15,7 @@ from modules.show_package_json_migrations import show_package_json_migrations
 def main_menu():
     options = [
         "Seed",
+        "Backup",
         "Migration Generate",
         "Migration Run",
         "Migration Revert",
@@ -28,6 +30,8 @@ def main_menu():
     try:
         if choice == "Seed":
             seed()
+        elif choice == "Backup":
+            backup()
         elif choice == "Migration Generate":
             migration_generate()
             migration_run()
